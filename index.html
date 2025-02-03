@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Karta - Mina Platser</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />   
+    <link rel="stylesheet" href="./styles/base-style.css" />
+</head>
+<body>
+    <header>
+        <h1>Mina platser</h1>
+        <label for="menu-toggle" class="menu-toggle-button">
+            <span class="visually-hidden">Kart-meny</span>
+            <svg class="menu-toggle-icon" width="40px" height="40px" viewBox="0 0 100 100" aria-hidden="true">
+                <path class="path-1" d="M 20,29 H 80" />
+                <path class="path-2" d="M 20,50 H 80" />
+                <path class="path-3" d="M 20,50 H 80" />
+                <path class="path-4" d="M 20,71 H 80" />
+            </svg>
+        </label>
+        <input id="menu-toggle" class="menu-toggle-checkbox visually-hidden" type="checkbox">
+            
+        <ul id="menu" class="toggle-menu">
+            <li>
+                <label>
+                    <input id="watch-my-position" type="checkbox">Visa min position
+                </label>
+            </li>
+            <li>
+                <button id="save-my-position">Spara min plats</button>
+            </li>
+            <li>
+                <button id="open-map-settings">Välj karta</button>
+            </li>
+        </ul>
+    </header>
+    <main>
+        <section class="body-container">
+            <!-- Error message container -->
+            <div class="error-area" id="error-message"></div>
+            <!-- Map area -->
+            <section class="map-area" id="map" role="application" aria-label="Karta" tabindex="0"></section>
+            
+            <section class="map-panel-area" id="map-sidebar">
+                <!-- place content area -->
+                <form id="edit-place-form" class="edit-place-form">
+                    <label for="place-name">Plats:</label>
+                    <input type="text" name="placeName" id="place-name" placeholder="Ge platsen ett namn" />
+                    <div id="place-info" class="place-info-text"></div>
+                    <button type="submit">Spara</button><button id="delete">Radera</button>
+                </form>
+
+                <div id="map-options-container"></div>
+            </section> 
+        </section>
+        
+    </main>
+    <footer>
+    </footer>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <script type="module" src="script.js" defer></script>
+</body>
+</html>
