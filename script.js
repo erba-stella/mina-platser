@@ -106,7 +106,6 @@ tileLayer.on('tileerror', tileError);
 
 // If the chosen map tiles cant be loaded, load fallback tiles and send error message.
 function tileError(error) {
-    console.log(error)
     errorElem.innerHTML = `<p>Kartan ${tileName} kunde inte laddas. Istället visas ${tileName_fallback}</p>`;
     map.removeLayer(tileLayer);
     tileLayer = getTileLayer(tileName_fallback);
@@ -163,7 +162,6 @@ function renderMapTypeOptions(tileList, parentElem) {
 
     // Listen for map type changes and change tiles
     selectID(changeMapTypeID).addEventListener('change', function (event) {
-        console.log('ev target', event.target.value);
         // save the currently used map tiles as fallback, before changing to new map tiles
         tileName_fallback = tileName;
         // Get the new tile name
@@ -271,7 +269,6 @@ map.on('click', event => {
 // Listen for zoom change
 map.on('zoomend', function (e) {
     currentZoom = map.getZoom();
-    console.log('Current zoom level:', map.getZoom());
     saveToStorage('map_currentZoom', currentZoom);
 });
 
@@ -287,7 +284,6 @@ function renderPlacesToMapUI(placesArr) {
     if (placesArr.lengt < 1) return;
     placesArr.forEach(place => {
         renderPlaceToMapUI(place);
-        console.log(place.latlng)
     });
 }
 
@@ -376,10 +372,8 @@ function createNewPlaceFromCurrentPosition() {
             // Create and save a new place object
             const formData = collectFormData(event.target);
 
-            console.log('formData', formData)
             const newPlace = {
-                // name: formData.placeName,
-                name: placeNameElem.value,
+                name: formData.placeName,
                 latlng,
                 radius,
                 timestamp: newDateToISO()
@@ -400,7 +394,6 @@ function createNewPlaceFromCurrentPosition() {
         deleteButton.addEventListener('click', event => { 
             event.preventDefault();
 
-            console.log('remove')
             // Remove form inputs and close the place editor
             circleRadius.remove();
             placeFormElem.reset();
@@ -460,7 +453,6 @@ function placeSelected(e, placeOnMap, arr = places) {
         placeFormElem.reset();
         mapSidebarElem.classList.remove('place_active');
 
-        console.log(places)
     }, { once: true });
 }
 
@@ -480,7 +472,6 @@ function getPositionLatlng(position) {
 function getPositionRadius(position) {
     return Math.ceil(position.coords.accuracy);
 }
-
 
 function positionError(error) {
     console.warn(`ERROR(${error.code}): ${error.message}`);
